@@ -1495,7 +1495,6 @@ if (require.main === module) {
   });
 }
 
-// Export serverless handler for Vercel / Cloud Functions
-module.exports = (req, res) => {
-  server.emit('request', req, res);
-};
+// Export server for local module usage
+module.exports = server;
+
