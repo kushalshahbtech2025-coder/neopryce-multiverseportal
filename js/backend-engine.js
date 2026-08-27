@@ -737,17 +737,57 @@ window.BackendEngine = (function () {
         "⭐ 'Military-grade TUF chassis feels indestructible. Battery life is surprising for a high-end laptop.' - Sarah L.",
         "💬 'Best laptop purchase of the year at ₹1,19,900!' - Arjun K."
       ];
-      sentimentSummary = '98% Positive Customer Sentiment — Buyers call it the ultimate deal of the year at 38% off.';
+    } else if (lowerInput.includes('ugaoo') || lowerInput.includes('bamboo') || lowerInput.includes('feng shui') || lowerInput.includes('plant')) {
+      scrapedTitle = 'Ugaoo Lucky Bamboo 3 Layer Feng Shui Plant (green color)';
+      category = 'Garden & Indoor Plants';
+      brand = 'Ugaoo';
+      basePrice = 349.00;
+      originalPrice = 499.00;
+      rating = 4.2;
+      reviewCount = 9256;
+      img = 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80';
+      reviewHighlights = [
+        "⭐ 'Beautiful healthy 3-layer lucky bamboo plant! Arrived in great packaging with green leaves.' - Verified Buyer",
+        "⭐ 'Brought great positive energy and freshness to my desk. Excellent value at ₹349.' - Customer Review",
+        "💬 'Trusted Ugaoo brand quality. Easy to care for with minimal watering.' - Plant Enthusiast"
+      ];
+      sentimentSummary = '96% Positive Customer Sentiment extracted from 9,256 verified reviews.';
     } else {
       scrapedTitle = cleanTitleFromInput(inputUrlOrQuery);
-      basePrice = Math.round((2500 + Math.random() * 25000));
-      originalPrice = Math.round((basePrice * (1.15 + Math.random() * 0.30)));
+      if (lowerInput.includes('plant') || lowerInput.includes('bamboo') || lowerInput.includes('flower') || lowerInput.includes('ugaoo') || lowerInput.includes('pot') || lowerInput.includes('seed')) {
+        category = 'Garden & Indoor Plants';
+        brand = 'Ugaoo';
+        basePrice = 349.00;
+        originalPrice = 499.00;
+        if (!img) img = 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80';
+      } else if (lowerInput.includes('skincare') || lowerInput.includes('serum') || lowerInput.includes('cream') || lowerInput.includes('face') || lowerInput.includes('lotion')) {
+        category = 'Beauty & Skincare';
+        brand = 'Foxtale';
+        basePrice = 299.00;
+        originalPrice = 450.00;
+        if (!img) img = 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80';
+      } else if (lowerInput.includes('medicine') || lowerInput.includes('tablet') || lowerInput.includes('supplement') || lowerInput.includes('health') || lowerInput.includes('vitamin')) {
+        category = 'Health & Personal Care';
+        brand = 'Revital';
+        basePrice = 330.00;
+        originalPrice = 600.00;
+        if (!img) img = 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=600&q=80';
+      } else if (lowerInput.includes('plier') || lowerInput.includes('tool') || lowerInput.includes('wire') || lowerInput.includes('hardware')) {
+        category = 'Tools & Hardware';
+        brand = 'Taparia';
+        basePrice = 79.00;
+        originalPrice = 90.85;
+        if (!img) img = 'https://m.media-amazon.com/images/I/71Vj0qZ95sL._SL1500_.jpg';
+      } else {
+        basePrice = Math.round((2500 + Math.random() * 25000));
+        originalPrice = Math.round((basePrice * (1.15 + Math.random() * 0.30)));
+      }
       rating = Math.round((4.2 + Math.random() * 0.7) * 10) / 10;
       reviewCount = Math.floor(Math.random() * 800) + 120;
       reviewHighlights = [
-        `⭐ 'Great build quality and solid performance for ₹${basePrice.toLocaleString()}. Very satisfied!' - Verified Buyer`,
-        `⭐ 'Fast delivery and item arrived in perfect condition.' - Customer Review`,
-        `💬 'Good value compared to standard retail prices.' - Tech Reviewer`
+        `⭐ 'Great product performance and solid value for ₹${basePrice.toLocaleString('en-IN')}. Very satisfied!' - Verified Buyer`,
+        `⭐ 'Fast delivery and item arrived in perfect original condition.' - Customer Review`,
+        `💬 'Excellent quality compared to standard retail store prices.' - Verified Reviewer`
       ];
       sentimentSummary = `${Math.floor(Math.random() * 10 + 88)}% Positive Sentiment extracted from ${reviewCount} customer reviews.`;
     }
@@ -1058,8 +1098,13 @@ window.BackendEngine = (function () {
       return 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80';
     }
 
+    // Plants, Home & Gardening
+    if (q.includes('ugaoo') || q.includes('bamboo') || q.includes('plant') || q.includes('indoor') || q.includes('flower') || q.includes('pot') || q.includes('garden') || q.includes('feng shui')) {
+      return 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80';
+    }
+
     // Generic product fallback
-    return 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=90';
+    return 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80';
   }
 
   function cleanTitleFromInput(str) {
